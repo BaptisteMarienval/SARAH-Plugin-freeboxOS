@@ -1,0 +1,16 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulefreeboxOS" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+  <rule id="rulefreeboxOS" scope="public">
+    <example>Sarah donne moi l'historique des appels</example>
+    <tag>out.action=new Object(); </tag>
+    <item>Sarah</item>
+	
+     <one-of>
+	  <item>authentification freebox<tag>out.action.actionToDo="auth";</tag></item>
+	  <item>liste appels<tag>out.action.actionToDo="callList";</tag></item>
+    </one-of> 
+	
+	</item>
+    <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/freeboxOS";</tag>
+  </rule>
+</grammar>
+              

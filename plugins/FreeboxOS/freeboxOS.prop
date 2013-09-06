@@ -1,0 +1,9 @@
+{
+  "modules" : { 
+    "freeboxOS"  : {
+      "description": "Gestion freeboxOS pour freebox Revolution",
+      "version" : "1.0",
+	  "ipFreebox" : "78.244.124.99"
+    }
+  }
+}
