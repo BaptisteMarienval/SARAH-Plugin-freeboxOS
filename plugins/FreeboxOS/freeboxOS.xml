@@ -3,13 +3,18 @@
     <example>Sarah donne moi l'historique des appels</example>
     <tag>out.action=new Object(); </tag>
     <item>Sarah</item>
-	
      <one-of>
-	  <item>authentification freebox<tag>out.action.actionToDo="auth";</tag></item>
-	  <item>liste appels<tag>out.action.actionToDo="callList";</tag></item>
+	  <item>lance l'authentification de la fribox<tag>out.action.actionToDo="askAuth";</tag></item>
+	  <item>enregistre l'application auprès de la fribox<tag>out.action.actionToDo="confirmAuth";</tag></item>
+	  
+	  <item>donne moi l'historique des appels<tag>out.action.actionToDo="histoCall";out.action.periodHisto=3;</tag></item>
+	  <item>donne moi les appels manqués<tag>out.action.actionToDo="missingCall";out.action.periodMissCall=0;</tag></item>
+	  
+	 <item>quelle est mon adresse IP locale<tag>out.action.actionToDo="getIPLan";</tag></item>
+	<item>quelle est mon adresse IP web<tag>out.action.actionToDo="getIPWeb";</tag></item>
+	<item>quelle est ma bande passante maximale<tag>out.action.actionToDo="getMaxBandwidth";</tag></item>
+	<item>quelle est ma bande passante utilisée<tag>out.action.actionToDo="getCurrentBandwidth";</tag></item>
     </one-of> 
-	
-	</item>
     <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/freeboxOS";</tag>
   </rule>
 </grammar>

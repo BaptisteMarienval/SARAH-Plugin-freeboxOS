@@ -1,9 +1,15 @@
 {
   "modules" : { 
     "freeboxOS"  : {
-      "description": "Gestion freeboxOS pour freebox Revolution",
-      "version" : "1.0",
-	  "ipFreebox" : "78.244.124.99"
+		"description"	: "Gestion freeboxOS pour freebox Revolution",
+		"version"		: "1.0",
+		"freeboxAddr" 	: "http://mafreebox.freebox.fr/api/v1/",
+		"track_id"		: "GENERATED_TRACK_ID",
+		"app_token"		: "GENERATED_TOKEN",
+		"app_id" 		: "sarah.freeboxOS", 
+		"app_name"		: "FreeboxOS for SARAH",
+		"app_version"	: "0.0.1",
+		"device_name"	: "SARAH Server"
     }
   }
 }

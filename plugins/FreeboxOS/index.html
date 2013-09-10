@@ -1,0 +1,49 @@
+﻿<html>
+<body>
+<h1>Documentation Plugin freeboxOS pour SARAH</h1><br>
+auteur : Baptiste MARIENVAL<br>
+date : 10/09/2013<br>
+version : 1.0<br>
+<br>
+Pour s'authentifier auprès de la freebox Revolution, il faut générer un password. <br>
+Pour cela, il faut récupérer diverses informations.<br>
+<br>
+J'ai simplifié la tache pour ne pas a avoir à gérer cette étape. Cependant, quelques manipulations sont nécessaires :<br>
+<br>
+<b>1.   DEMANDE AUTHENTIFICATION</b><br>
+<item>lance l'authentification de la fribox<tag>out.action.actionToDo="askAuth";</tag></item><br>
+<br>
+Construit la demande de token auprès de la box. On va récupérer un track_id et un token qui seront enregistrer dans le freeboxOS.prop (remplacement des chaines GENERATED_TRACK_ID et GENERATED_TOKEN)<br>
+On se servira de ces 2 infos pour ouvrir des seesions dans le futur. <br>
+ATTENTION !!!!<br>
+Avant de passer à la suite, il faut valider la demande sur le freebox Revolution, via l'ecran LCD (fleche de droite pour indiquer "OUI").<br>
+Vous pouvez également vérifier que les valeurs ont bien été ajoutées au .prop avant de passer à l'étape suivante.<br>
+ <br>
+<b>2.   ACCEPTER AUTHENTIFICATION</b><br>
+<item>enregistre l'application auprès de la fribox<tag>out.action.actionToDo="confirmAuth";</tag></item><br>
+<br>
+Une fois l'authentification demandée, il faut valider coté application.<br>
+Cependant, pour cette étape, il faut relancer sarah (nodejs) afin de recharger les infos du freeboxOS.prop (id et token).<br>
+<br>
+<br>
+Ces 2 étapes ne sont à faire qu'une seule fois.<br>
+<br>
+<br>
+<b>POUR ALLER UN PEU PLUS LOIN</b><br>
+<br>
+Vous remarquerez qu'au début de chaque requete par la suite, on passe :<br>
+<br>
+			url : baseURL+callLogsURL,<br>
+			headers : {<br>
+				'X-Fbx-App-Auth' : app.session_token<br>
+			}, <br>
+			method : 'GET',<br>
+		};<br>
+<br>
+le seesion token est généré lors d'une demande de session à l'aide du password généré avec l'app token et une clé.<br>
+A chaque appel, je regénère ce token de session sans me poser de question. <br>
+Il est certainement possible de vérifier l'état de la session pour ne le générer que si nécessaire ....<br>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,11 @@
+
+.plugin-gridster.freeboxOS .front {
+  background: #FFFFFF url('images/freeboxOS-logo.jpg') center 30px;
+  background-size:   180px 100px;
+  background-repeat: no-repeat;
+}
+
+.plugin-gridster.freeboxOS .back {
+  background: #FFFFFF;
+}
+}
