@@ -363,10 +363,10 @@ function wifiConfig() {
 	
 					var bbs = bodyJSON.result.bbs;
 					var ap_params = bodyJSON.result.ap_params;
-					
+
 					// Status Wifi
 					if (data.actionToDo == 'getWifiStatus') {
-						if (ap_params.enable) {
+						if (bodyJSON.result.ap_params.enabled == true) {
 							var tts = "Le wifi est activai";
 						}
 						else {
