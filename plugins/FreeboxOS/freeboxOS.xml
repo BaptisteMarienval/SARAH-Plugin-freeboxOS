@@ -14,6 +14,9 @@
 	<item>quelle est mon adresse IP web<tag>out.action.actionToDo="getIPWeb";</tag></item>
 	<item>quelle est ma bande passante maximale<tag>out.action.actionToDo="getMaxBandwidth";</tag></item>
 	<item>quelle est ma bande passante utilisée<tag>out.action.actionToDo="getCurrentBandwidth";</tag></item>
+	<item>quelle est le status du wifi<tag>out.action.actionToDo="getWifiStatus";</tag></item>
+	<item>active le wifi<tag>out.action.actionToDo="setWifiOn";</tag></item>
+	<item>désactive<tag>out.action.actionToDo="setWifiOff";</tag></item>
     </one-of> 
     <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/freeboxOS";</tag>
   </rule>

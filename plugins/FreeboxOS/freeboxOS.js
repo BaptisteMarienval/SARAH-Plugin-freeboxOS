@@ -15,6 +15,7 @@ exports.action = function(data, callback, config, SARAH){
 	var lanConfigURL 		= "lan/config/";
 	var connectionStatusURL = "connection/";
 	var connectionConfigURL = "connection/config/";
+	var wifiConfigURL 		= "wifi/config/";
 	
 	var baseURL 	= config.freeboxAddr;
 	var track_id	= config.track_id;
@@ -62,6 +63,7 @@ if (data.actionToDo == 'histoCall' || data.actionToDo == 'missingCall' ) {
 if (data.actionToDo == 'getIPLan') {
  sessionRequest(lanConfig);
 }
+
 // Récupération des infos LAN
 if (data.actionToDo == 'getIPWeb') {
  sessionRequest(connectionStatus);
@@ -70,6 +72,16 @@ if (data.actionToDo == 'getIPWeb') {
 // Récupération des infos de connection
 if ((data.actionToDo == 'getMaxBandwidth') || (data.actionToDo == 'getCurrentBandwidth')) {
  sessionRequest(connectionStatus);
+}
+
+// Récupération des infos wifi
+if ((data.actionToDo == 'getWifiStatus')) {
+ sessionRequest(wifiConfig);
+}
+
+// Modification de la configuration wifi
+if ((data.actionToDo == 'setWifiOn') || (data.actionToDo == 'setWifiOff')) {
+ sessionRequest(setWifiConfig);
 }
 
 
@@ -212,7 +224,6 @@ function lanConfig() {
 }
 
 
-
 /*****************************************
 *************** CONNECTION STATUS ********
 *****************************************/
@@ -322,9 +333,90 @@ function connectionConfig() {
 					var api_remote_access = bodyJSON.result.api_remote_access;
 					var allow_token_request = bodyJSON.result.allow_token_request;
 					var remote_access_ip = bodyJSON.result.remote_access_ip;
+					
+					if (data.actionToDo == 'MyACTION') {
+					}
+					
 				}
 				else{
 					console.log("callList : erreur lors de la requete : "+baseURL+connectionConfigURL);
+				}
+			});
+}
+
+/***********************************
+*************** WIFI CONFIG ********
+***********************************/
+function wifiConfig() {
+	var options = {
+			url : baseURL+wifiConfigURL,
+			headers : {
+				'X-Fbx-App-Auth' : app.session_token
+			}, 
+			method : 'GET',
+		};
+
+		request(options, function (error, response, body) {
+		
+				if (!error && response.statusCode == 200){
+					var bodyJSON = JSON.parse(body);
+	
+					var bbs = bodyJSON.result.bbs;
+					var ap_params = bodyJSON.result.ap_params;
+					
+					// Status Wifi
+					if (data.actionToDo == 'getWifiStatus') {
+						if (ap_params.enable) {
+							var tts = "Le wifi est activai";
+						}
+						else {
+							var tts = "Le wifi est desactivai";
+						}
+					
+					}
+					
+					SARAH.speak(tts);
+				}
+				else{
+					console.log("callList : erreur lors de la requete : "+baseURL+wifiConfigURL);
+				}
+			});
+}
+
+// Disable WIFI
+function setWifiConfig() {
+
+var tts = "";
+var status = true;
+if (data.actionToDo == 'setWifiOff') {
+	status = false;
+}
+
+var options = {
+			url : baseURL+wifiConfigURL,
+			headers : {
+				'X-Fbx-App-Auth' : app.session_token
+			}, 
+			data : {'ap_params': {'enabled': status}},
+			method : 'POST',
+		};
+		request(options, function (error, response, body) {
+		
+				if (!error && response.statusCode == 200){
+
+					// Set Wifi
+					if (data.actionToDo == 'setWifiOn') {
+						tts = "Le wifi est activai";
+					}
+					
+					if (data.actionToDo == 'setWifiOff') {
+						tts = "Le wifi est desactivai";
+					}
+					
+					SARAH.speak(tts);
+				}
+				else{
+					console.log("callList : erreur lors de la requete : "+baseURL+wifiConfigURL+" : disableWifi");
 				}
 			});
 }
