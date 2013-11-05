@@ -393,22 +393,24 @@ if (data.actionToDo == 'setWifiOff') {
 }
 
 var options = {
-			url : baseURL+wifiConfigURL,
-			headers : {
+		url    : baseURL+wifiConfigURL,
+		method : 'PUT',
+		headers : {
 				'X-Fbx-App-Auth' : app.session_token
-			}, 
-			data : {'ap_params': {'enabled': status}},
-			method : 'POST',
-		};
+			},
+		json   : {
+			  'ap_params': {'enabled': status}
+			  },
+		encode : 'utf-8'
+	};
 		request(options, function (error, response, body) {
 		
 				if (!error && response.statusCode == 200){
-
-					// Set Wifi
+					// Set Wifi On
 					if (data.actionToDo == 'setWifiOn') {
 						tts = "Le wifi est activai";
 					}
-					
+					// Set Wifi Off
 					if (data.actionToDo == 'setWifiOff') {
 						tts = "Le wifi est desactivai";
 					}

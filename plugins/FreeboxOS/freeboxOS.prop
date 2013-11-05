@@ -2,7 +2,7 @@
   "modules" : { 
     "freeboxOS"  : {
 		"description"	: "Gestion freeboxOS pour freebox Revolution",
-		"version"		: "1.0",
+		"version"		: "1.1",
 		"freeboxAddr" 	: "http://mafreebox.freebox.fr/api/v1/",
 		"track_id"		: "GENERATED_TRACK_ID",
 		"app_token"		: "GENERATED_TOKEN",
